@@ -1,32 +1,80 @@
 ﻿using System;
-
+//ejercicio de repaso 96
 namespace Repaso
 {
-    //Crea una clase Persona con nombre y edad. Instancia dos personas.
+    //Crea un sistema de gestión de estudiantes usando herencia, encapsulación y polimorfismo
 
-    public class Persona
+    public class Estudiante
     {
-        public string Nombre { get; set; }
-        public int Edad { get; set; }
+        // Atributos privados para encapsulación
+        private string _nombre;
+        private string _grado;
+        private int _edad;
 
-        public Persona(string nombre, int edad)
+        // Propiedades públicas para acceder a los atributos privados
+        public string Nombre
         {
-            Nombre = nombre;
-            Edad = edad;
+            get { return _nombre; }
+
+            set { _nombre = value; }
+        }
+
+        public string Grado
+        {
+            get { return _grado; }
+
+            set { _grado = value; }
+        }
+
+        public int Edad
+        {
+            get { return _edad; }
+
+            set { _edad = value; }
+        }
+
+        // Método virtual para permitir polimorfismo
+        public virtual void Bienvenida()
+        {
+            Console.WriteLine($"Bienvenido");
         }
     }
 
-    class Program
+    public class EstudiantePrimaria : Estudiante
+    {
+        public override void Bienvenida()
+        {
+            Console.WriteLine($"Bienvenida: {Nombre} (Primaria de {Grado} con {Edad} years)");
+        }
+    }
+    
+    public class EstudianteSecundaria : Estudiante
+    {
+        public override void Bienvenida()
+        {
+            Console.WriteLine($"Bienvenida: {Nombre}(Secundaria de {Grado} con {Edad} years )");
+        }
+    }
+
+    class program
     {
         static void Main()
         {
-            Persona persona1 = new Persona("Jose", 20);
-           Console.WriteLine($"Nombre:  {persona1.Nombre} Edad: { persona1.Edad}");
+            // Crear instancias de estudiantes y mostrar sus bienvenidas
+            EstudiantePrimaria primaria = new EstudiantePrimaria();
+            primaria.Nombre = "Maria";
+            primaria.Grado = "Tercero";
+            primaria.Edad = 8;
+            primaria.Bienvenida();
 
-            Persona persona2 = new Persona("Ana", 25);
-            Console.WriteLine($"Nombre:  {persona2.Nombre} Edad: {persona2.Edad}");
+            EstudianteSecundaria secundaria = new EstudianteSecundaria();
+            secundaria.Nombre = "Sofia";
+            secundaria.Grado = "Sexto Bachiller";
+            secundaria.Edad = 17;
+            secundaria.Bienvenida();
 
-
+            Console.ReadLine();
         }
     }
+
 }
